@@ -1,1 +1,1 @@
-web: gunicorn khat.wsgi --log-file -
+web: gunicorn <khat>.wsgi --log-file -
