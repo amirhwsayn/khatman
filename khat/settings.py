@@ -78,12 +78,13 @@ WSGI_APPLICATION = 'khat.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'd4g761rn7tk01n',
-        'PASSWORD': '73cfb6e59367ad94a8dc476bbf3376d5df641828306067f721fb847d1da6fa70',
-        'USER': 'quyqmvvtktajkd',
-        'PORT': '5432'
+        'NAME': 'khatmanage',
+        'PASSWORD': 'amir',
+        'USER': 'postgres',
+        'PORT': '5432',
         }
     }
+
 
 import dj_database_url
 
