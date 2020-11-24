@@ -8,8 +8,9 @@ from django.http import HttpResponse
 from .serializer import serilizermanagerinfo
 
 
-def registeradmins(request, password_admin, name_admin, name_sc, number_admin):
-    s = adminss(password=password_admin, name=name_admin, namesc=name_sc, number=number_admin)
+def registeradmins(request,id_admin, password_admin, name_admin, number_admin):
+    s = adminss(id=id_admin,password=password_admin
+                , name=name_admin, number=number_admin)
     s.save()
     return HttpResponse("saved")
 
