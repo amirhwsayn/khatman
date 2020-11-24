@@ -10,6 +10,5 @@ class serilizermanagerinfo(serializers.ModelSerializer):
             'id',
             'password',
             'name',
-            'namesc',
             'number',
         )
