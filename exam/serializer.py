@@ -6,9 +6,9 @@ from .models import adminss
 class serilizermanagerinfo(serializers.ModelSerializer):
     class Meta:
         model = adminss
-        fields = (
+        fields = [
             'id',
             'password',
             'name',
             'number',
-        )
+        ]
