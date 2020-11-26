@@ -79,10 +79,10 @@ WSGI_APPLICATION = 'khat.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'khatmanage',
+        'NAME': 'amirdata',
         'PASSWORD': 'amir',
         'USER': 'postgres',
-        'PORT': '5432',
+        'PORT': 5432,
         }
     }
 
@@ -129,5 +129,4 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-
 django_heroku.settings(locals())

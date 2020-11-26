@@ -19,6 +19,7 @@ from exam import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('rig/<str:password_admin>/<str:name_admin>/<str:number_admin>', views.registeradmins),
-    path('dataadmin/<str:uuid>' , views.dataadmin.as_view())
+
+    path('rigesteradmin/<str:id_admin>/<str:password_admin>/<str:name_admin>/<str:number_admin>', views.registeradmins),
+    path('loginadmin/<str:id_loginad>/<str:pass_login>' , views.login_admin.as_view()),
 ]
