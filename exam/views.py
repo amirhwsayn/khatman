@@ -14,7 +14,7 @@ def registeradmins(request, id_admin, password_admin, name_admin, number_admin):
     s = adminss(id=id_admin, password=password_admin
                 , name=name_admin, number=number_admin)
     s.save()
-    return Response(status=status.HTTP_202_ACCEPTED)
+    return HttpResponse("asdsadads")
 
 
 
