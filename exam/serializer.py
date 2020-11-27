@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import adminss
+from .models import adminss , classes
 
 
 
@@ -11,4 +11,15 @@ class serilizermanagerinfo(serializers.ModelSerializer):
             'password',
             'name',
             'number',
+        ]
+
+
+class sericlassinfo(serializers.ModelSerializer):
+    class Meta:
+        model = classes
+        fields = [
+            'id',
+            'name',
+            'code',
+            'datacreate',
         ]
