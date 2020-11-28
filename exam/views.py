@@ -34,3 +34,8 @@ class dataclasss(APIView):
         asd = adminss.objects.get(pk=id_admin).calsss.all()
         data = sericlassinfo(asd, many=True)
         return Response(data.data)
+
+
+def sttt(request):
+    ass = classes.objects.get(pk = 'ahamd').stus_set.all()
+    return HttpResponse(ass)

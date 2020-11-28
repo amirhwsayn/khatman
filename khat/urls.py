@@ -20,10 +20,14 @@ from exam import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+
     # admins url
     path('rigstu/<str:id_admin>', views.dataclasss.as_view()),
     path('rigesteradmin/<str:id_admin>/<str:password_admin>'
          '/<str:name_admin>/<str:number_admin>', views.registeradmins),
     path('loginadmin/<str:id_loginad>/<str:pass_login>', views.login_admin.as_view()),
     # end admins url
+
+
+    path('aaaaa' , views.sttt)
 ]
