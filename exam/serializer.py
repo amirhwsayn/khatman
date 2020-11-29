@@ -1,16 +1,5 @@
 from rest_framework import serializers
-from .models import adminss, classes, stus , imei_admin
-
-
-class fullmanagerinfo(serializers.ModelSerializer):
-    class Meta:
-        model = adminss
-        fields = [
-            'id',
-            'password',
-            'name',
-            'number',
-            ]
+from .models import adminss, classes, stus, imei_admin
 
 
 class serilizermanagerinfo(serializers.ModelSerializer):
@@ -21,7 +10,7 @@ class serilizermanagerinfo(serializers.ModelSerializer):
             'password',
             'name',
             'number',
-            ]
+        ]
 
 
 class sericlassinfo(serializers.ModelSerializer):
@@ -32,7 +21,7 @@ class sericlassinfo(serializers.ModelSerializer):
             'name',
             'code',
             'datacreate',
-            ]
+        ]
 
 
 class seristusinfo(serializers.ModelSerializer):
@@ -42,13 +31,13 @@ class seristusinfo(serializers.ModelSerializer):
             'id',
             'name',
             'datacreate',
-            ]
+        ]
 
 
 class imeiinfo(serializers.ModelSerializer):
     class Meta:
         model = imei_admin
         fields = [
-            'name',
+            'id_admin',
             'pass_admin',
-            ]
+        ]

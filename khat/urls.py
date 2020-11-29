@@ -18,15 +18,24 @@ from django.urls import path
 from exam import views
 from exam.views import getstus
 
-
 urlpatterns = [
     path('admin/', admin.site.urls),
 
-    # admins url
-    path('rigstu/<str:id_admin>', views.dataclasss.as_view()),
+    path('dataclass/<str:id_admin>/<str:pass_admin>', views.dataclasss.as_view()),
+    # return calsss data
+
     path('rigesteradmin/<str:id_admin>/<str:password_admin>'
-         '/<str:name_admin>/<str:number_admin>', views.registeradmins),
-    path('loginadmin/<str:id_loginad>/<str:pass_login>', views.login_admin.as_view()),
-    path('admin/getdata/classes/<str:class_pk>' , getstus.as_view())
-    # end admins url
+         '/<str:name_admin>/<str:number_admin>', views.Rigadmin.as_view()),
+    # Rigester Admin
+
+    path('loginadmin/<str:id_loginad>/<str:pass_login>/<str:Imei_adminnn>'
+         , views.login_admin_at_new_device.as_view()),
+    # Set new IMEI for Exist Admin
+
+    path('getstusfromclass/<str:class_pk>', getstus.as_view()),
+    # Return List of This class stus
+
+    path('getalladmindata/<str:imei_adminget>', views.return_admindata_W_imei.as_view()),
+    # Return All adminData With IMEI
+
 ]
