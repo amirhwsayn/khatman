@@ -1,12 +1,10 @@
-from rest_framework.views import APIView
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import HttpResponse
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
-
 from .models import adminss, classes, imei_admin
-from .serializer import sericlassinfo, seristusinfo, serilizermanagerinfo, imeiinfo
+from .serializer import sericlassinfo, seristusinfo, fullmanagerinfo, imeiinfo
 
 
 # Create your views here.
@@ -20,7 +18,7 @@ def registeradmins(request, id_admin, password_admin, name_admin, number_admin):
 
 
 class login_admin(APIView):
-    def get(self, request, id_loginad, pass_login , Imei_adminn):
+    def get(self, request, id_loginad, pass_login, Imei_adminn):
 
         try:
             adminss.objects.get(pk=id_loginad)
@@ -29,9 +27,9 @@ class login_admin(APIView):
 
         else:
             if adminss.objects.get(pk=id_loginad).password == pass_login:
-                id_ad = adminss.objects.get(pk = id_loginad).id
-                pass_ad = adminss.objects.get(pk = id_loginad).password
-                imei_admin(imei=Imei_adminn, id_admin=id_ad , pass_admin=pass_ad).save()
+                id_ad = adminss.objects.get(pk=id_loginad).id
+                pass_ad = adminss.objects.get(pk=id_loginad).password
+                imei_admin(imei=Imei_adminn, id_admin=id_ad, pass_admin=pass_ad).save()
                 return Response(status=status.HTTP_200_OK)
             else:
                 return Response(status=status.HTTP_400_BAD_REQUEST)
@@ -61,3 +59,18 @@ class imei(APIView):
             firstlogindata = imei_admin.objects.filter(pk=imei_adminget)
             datas = imeiinfo(firstlogindata, many=True)
             return Response(datas.data)
+
+
+class getfulldata_admin(APIView):
+    def get(self, request, id__login, pass__login):
+        try:
+            adminss.objects.get(pk=id__login)
+        except ObjectDoesNotExist:
+            Response(status=status.HTTP_400_BAD_REQUEST)
+        else:
+            if adminss.objects.get(pk=id__login).password == pass__login:
+                datadd = adminss.objects.filter(pk=id__login)
+                ggss = fullmanagerinfo(datadd, many=True)
+                Response(ggss.data)
+            else:
+                Response(status=status.HTTP_400_BAD_REQUEST)
