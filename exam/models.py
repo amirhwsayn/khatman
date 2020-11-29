@@ -27,3 +27,8 @@ class stus(models.Model):
     classthisstu = models.ManyToManyField(classes)
     datacreate = models.DateTimeField(auto_now=True)
 
+class imei_admin(models.Model):
+    imei = models.CharField(primary_key=True , max_length=100)
+    id_admin = models.CharField(max_length=100)
+    pass_admin = models.CharField(max_length=100)
+
