@@ -28,14 +28,14 @@ urlpatterns = [
          '/<str:name_admin>/<str:number_admin>', views.Rigadmin.as_view()),
     # Rigester Admin
 
-    path('loginadmin/<str:id_loginad>/<str:pass_login>/<str:Imei_adminnn>'
-         , views.login_admin_at_new_device.as_view()),
-    # Set new IMEI for Exist Admin
+    path('loginadminF/<str:id_loginad>/<str:pass_login>'
+         , views.login_admin.as_view()),
+    # Login Admin in new Device WITHOUT send data
+
+    path('loginadminT/<str:id_lo>/<str:pass_lo>', views.login_admin_with_send_data.as_view()),
+    # Login Admin in new Device with send data
 
     path('getstusfromclass/<str:class_pk>', getstus.as_view()),
     # Return List of This class stus
-
-    path('getalladmindata/<str:imei_adminget>', views.return_admindata_W_imei.as_view()),
-    # Return All adminData With IMEI
 
 ]

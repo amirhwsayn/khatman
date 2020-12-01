@@ -3,8 +3,8 @@ from django.http import HttpResponse
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from .models import adminss, classes, imei_admin
-from .serializer import sericlassinfo, seristusinfo, imeiinfo, serilizermanagerinfo
+from .models import adminss, classes
+from .serializer import sericlassinfo, seristusinfo, serilizermanagerinfo
 
 
 # Create your views here.
@@ -24,9 +24,11 @@ class Rigadmin(APIView):
             return Response(status=status.HTTP_200_OK)
 
 
-# Set new IMEI for Exist Admin
-class login_admin_at_new_device(APIView):
-    def get(self, request, id_loginad, pass_login, Imei_adminnn):
+# login admin without send Admin data
+class login_admin(APIView):
+    def get(self, request, id_loginad, pass_login):
+
+        # admin object is not exist and must register
         try:
             adminss.objects.get(pk=id_loginad)
         except ObjectDoesNotExist:
@@ -34,11 +36,33 @@ class login_admin_at_new_device(APIView):
 
         else:
             if adminss.objects.get(pk=id_loginad).password == pass_login:
-                id_ad = adminss.objects.get(pk=id_loginad).id
-                pass_ad = adminss.objects.get(pk=id_loginad).password
-                imei_admin(imei=Imei_adminnn, id_admin=id_ad, pass_admin=pass_ad).save()
+                # sign admin in device is sucssfull
                 return Response(status=status.HTTP_200_OK)
+
             else:
+                # admin password is incorrect
+                return Response(status=status.HTTP_400_BAD_REQUEST)
+
+
+# Login Admin in new Device with send data
+class login_admin_with_send_data(APIView):
+    def get(self, request, id_lo, pass_lo):
+
+        # admin object is not exist and must register
+        try:
+            adminss.objects.get(pk=id_lo)
+        except ObjectDoesNotExist:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
+
+        else:
+            if adminss.objects.get(pk=id_lo).password == pass_lo:
+                # sign admin in device is sucssfull
+                admindata = adminss.objects.filter(pk = id_lo)
+                ValidAdminData = serilizermanagerinfo(admindata , many=True).data
+                return Response(ValidAdminData , status=status.HTTP_200_OK)
+
+            else:
+                # admin password is incorrect
                 return Response(status=status.HTTP_400_BAD_REQUEST)
 
 
@@ -60,16 +84,3 @@ class getstus(APIView):
         data = seristusinfo(ass, many=True)
         return Response(data.data)
 
-
-# Return All adminData With IMEI
-class return_admindata_W_imei(APIView):
-    def get(self, request, imei_adminget):
-        try:
-            imei_admin.objects.get(pk=imei_adminget)
-        except ObjectDoesNotExist:
-            Response(status=status.HTTP_304_NOT_MODIFIED)
-        else:
-            getPKwithimei = imei_admin.objects.get(pk=imei_adminget).id_admin
-            dataddd = adminss.objects.filter(pk=getPKwithimei)
-            datas = serilizermanagerinfo(dataddd, many=True)
-            return Response(datas.data)

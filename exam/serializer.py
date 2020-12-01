@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import adminss, classes, stus, imei_admin
+from .models import adminss, classes, stus
 
 
 class serilizermanagerinfo(serializers.ModelSerializer):
@@ -31,13 +31,4 @@ class seristusinfo(serializers.ModelSerializer):
             'id',
             'name',
             'datacreate',
-        ]
-
-
-class imeiinfo(serializers.ModelSerializer):
-    class Meta:
-        model = imei_admin
-        fields = [
-            'id_admin',
-            'pass_admin',
         ]
