@@ -1,8 +1,8 @@
 from django.core.exceptions import ObjectDoesNotExist
-from django.http import HttpResponse
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
+
 from .models import adminss, classes
 from .serializer import sericlassinfo, seristusinfo, serilizermanagerinfo
 
@@ -14,14 +14,18 @@ from .serializer import sericlassinfo, seristusinfo, serilizermanagerinfo
 class Rigadmin(APIView):
     def get(self,request, id_admin, password_admin, name_admin, number_admin):
 
-        s = adminss(id=id_admin, password=password_admin
-                    , name=name_admin, number=number_admin)
-        s.save()
-        try:
-            adminss.objects.get(pk=id_admin)
-        except ObjectDoesNotExist:return Response(status=status.HTTP_400_BAD_REQUEST)
+        if adminss.objects.get(pk = id_admin).DoesNotExist == False:
+
+            s = adminss(id=id_admin, password=password_admin
+                        , name=name_admin, number=number_admin)
+            s.save()
+            try:
+                adminss.objects.get(pk=id_admin)
+            except ObjectDoesNotExist:return Response(status=status.HTTP_400_BAD_REQUEST)
+            else:
+                return Response(status=status.HTTP_200_OK)
         else:
-            return Response(status=status.HTTP_200_OK)
+            return Response(status=status.HTTP_304_NOT_MODIFIED)
 
 
 # login admin without send Admin data
@@ -83,4 +87,20 @@ class getstus(APIView):
         ass = classes.objects.get(pk=class_pk).stus_set.all()
         data = seristusinfo(ass, many=True)
         return Response(data.data)
+
+
+# add class for admin
+class addClassadmin(APIView):
+    def get(self, request , admin_pk , admin_password , class_id , class_name , class_code):
+
+        if adminss.objects.get(pk = admin_pk).password == admin_password:
+            classes(id=class_id , name=class_name , code=class_code).save()
+            Myclass = classes.objects.get(pk = class_id)
+            adminss.objects.get(pk = admin_pk).calsss.add(Myclass)
+
+            try:classes.objects.get(pk = class_id)
+            except ObjectDoesNotExist:
+                return Response(status=status.HTTP_400_BAD_REQUEST)
+            else: return Response(status=status.HTTP_200_OK)
+
 

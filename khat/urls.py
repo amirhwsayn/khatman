@@ -38,4 +38,7 @@ urlpatterns = [
     path('getstusfromclass/<str:class_pk>', getstus.as_view()),
     # Return List of This class stus
 
+    path('addclassforadmin/<str:admin_pk>/<str:admin_password>'
+         '/<str:class_id>/<str:class_name>/<str:class_code>' , views.addClassadmin.as_view())
+    # add class for Exist admin
 ]
