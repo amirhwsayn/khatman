@@ -73,7 +73,7 @@ class login_admin_with_send_data(APIView):
 # return calsss data
 class dataclasss(APIView):
     def get(self, request, id_admin, pass_admin):
-        if adminss.objects.get(pk=pass_admin).password == pass_admin:
+        if adminss.objects.get(pk=id_admin).password == pass_admin:
             asd = adminss.objects.get(pk=id_admin).calsss.all()
             data = sericlassinfo(asd, many=True)
             return Response(data.data)
